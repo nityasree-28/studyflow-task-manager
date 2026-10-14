@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8fc" />
+  <meta name="description" content="StudyFlow - a simple, private student assignment and task manager." />
+  <title>StudyFlow | Student Task Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard" id="homeLink">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M6 9.5 16 4l10 5.5v12L16 27 6 21.5v-12Z" fill="currentColor" opacity=".18"/><path d="m10 17 4 4 8-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Study<span class="brand-accent">Flow</span><small>STUDENT WORKSPACE</small></span>
+      </a>
+      <div class="nav-caption">WORKSPACE</div>
+      <nav class="nav-list" id="mainNav">
+        <button class="nav-item active" data-view="dashboard" aria-current="page"><span class="nav-ico">▦</span> Dashboard</button>
+        <button class="nav-item" data-view="all"><span class="nav-ico">☷</span> All tasks <span class="nav-count" id="sideAllCount">0</span></button>
+        <button class="nav-item" data-view="upcoming"><span class="nav-ico">◷</span> Upcoming</button>
+        <button class="nav-item" data-view="completed"><span class="nav-ico">✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-help"><span class="sparkle">✦</span><strong>Small steps. Big wins.</strong><p>A little progress every day adds up.</p></div>
+        <div class="profile"><div class="avatar">S</div><div><strong>Student Workspace</strong><small>Personal task planner</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div class="topbar-left"><button class="mobile-menu" id="menuButton" type="button" aria-label="Toggle navigation">☰</button><span class="crumb">Workspace <span>/</span> <strong id="crumbCurrent">Dashboard</strong></span></div>
+        <div class="topbar-right"><span class="today-chip" id="todayDate"></span><span class="top-divider"></span><div class="small-avatar" aria-label="Student profile">S</div></div>
+      </header>
+
+      <div class="content-wrap">
+        <div class="page-heading"><div><div class="eyebrow">YOUR PERSONAL STUDY SPACE</div><h1 id="mainTitle">Overview <span class="wave" aria-hidden="true">✦</span></h1><p id="mainSubtitle">Stay organized, stay focused, and make every deadline count.</p></div><button class="btn btn-primary top-add" id="newTaskTop"><span>＋</span> New task</button></div>
+
+        <section class="hero" aria-label="Your progress"><div class="hero-copy"><span class="hero-tag">✧ &nbsp; YOUR PRODUCTIVITY PARTNER</span><h2>Make room for<br /><em>what matters.</em></h2><p>Plan your assignments, track your progress, and finish your work with confidence.</p><button class="btn hero-button" id="newTaskHero">＋ &nbsp; Create a task <span>↗</span></button></div><div class="hero-art" aria-hidden="true"><div class="art-halo"></div><div class="hero-card card-float-one"><span class="tick-circle">✓</span><div><strong>Keep it going!</strong><small>You're making progress</small></div></div><div class="hero-calendar"><div class="calendar-binding">&nbsp; &nbsp;● &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ●</div><div class="calendar-top">OCT</div><div class="calendar-check">✓</div><div class="calendar-bottom">ONE TASK AT A TIME</div></div><div class="hero-card card-float-two"><span>✦</span><strong>You've got this</strong></div></div></section>
+
+        <section class="stats-grid" aria-label="Task statistics">
+          <article class="stat-card"><div class="stat-head"><span class="stat-icon icon-purple">▤</span><span class="stat-trend">All tasks</span></div><div class="stat-value" id="statTotal">0</div><div class="stat-label">Total assignments</div><div class="stat-note">Everything on your list</div></article>
+          <article class="stat-card"><div class="stat-head"><span class="stat-icon icon-teal">✓</span><span class="stat-trend">Well done!</span></div><div class="stat-value" id="statDone">0</div><div class="stat-label">Completed tasks</div><div class="stat-note">Every win counts</div></article>
+          <article class="stat-card"><div class="stat-head"><span class="stat-icon icon-orange">◷</span><span class="stat-trend">In progress</span></div><div class="stat-value" id="statPending">0</div><div class="stat-label">Pending tasks</div><div class="stat-note">Keep moving forward</div></article>
+          <article class="stat-card"><div class="stat-head"><span class="stat-icon icon-red">!</span><span class="stat-trend">Needs attention</span></div><div class="stat-value" id="statOverdue">0</div><div class="stat-label">Overdue tasks</div><div class="stat-note">Time to catch up</div></article>
+        </section>
+
+        <div class="bottom-grid">
+          <section class="tasks-panel" aria-label="Tasks">
+            <div class="panel-title-row"><div><h2 id="taskSectionTitle">Your tasks</h2><p>Keep the momentum going, one task at a time.</p></div><span class="task-counter" id="visibleCount">0 tasks</span></div>
+            <div class="tools-row"><label class="search-box"><span aria-hidden="true">⌕</span><input type="search" id="searchInput" placeholder="Search tasks or subjects..." aria-label="Search tasks or subjects" /></label><select id="priorityFilter" aria-label="Filter by priority"><option value="all">All priorities</option><option value="high">High priority</option><option value="medium">Medium priority</option><option value="low">Low priority</option></select></div>
+            <div class="filter-tabs" id="filterTabs" role="group" aria-label="Task status filter"><button class="filter-tab active" data-filter="all" aria-pressed="true">All tasks</button><button class="filter-tab" data-filter="today" aria-pressed="false">Due today</button><button class="filter-tab" data-filter="upcoming" aria-pressed="false">Upcoming</button><button class="filter-tab" data-filter="completed" aria-pressed="false">Completed</button></div>
+            <div id="taskList" class="task-list" aria-live="polite"></div>
+            <div class="panel-footer"><span id="footerMessage">You're doing great. Keep it up!</span><button id="clearCompleted" class="link-button" type="button">Clear completed</button></div>
+          </section>
+          <aside class="right-column" aria-label="Progress and study tips">
+            <section class="progress-panel"><div class="side-panel-head"><h2>Weekly progress</h2><span class="light-icon">↗</span></div><div class="progress-ring" id="progressRing"><div class="ring-core"><strong id="progressPercent">0%</strong><small>completed</small></div></div><p class="progress-message" id="progressMessage">A fresh start! Let's get things done.</p><div class="progress-breakdown"><div><span><i class="dot dot-purple"></i>Completed</span><strong id="miniCompleted">0</strong></div><div><span><i class="dot dot-muted"></i>Remaining</span><strong id="miniPending">0</strong></div></div></section>
+            <section class="tip-panel"><div class="tip-icon">✦</div><div><strong>Study tip of the day</strong><p>Break a big task into small steps. Starting is often the hardest part!</p></div></section>
+            <button class="export-button" id="exportTasks" type="button"><span>↓</span><span><strong>Export your tasks</strong><small>Download a JSON backup</small></span><span class="export-arrow">↗</span></button>
+          </aside>
+        </div>
+        <footer class="site-footer">Built with care for better study days. &nbsp;·&nbsp; StudyFlow © 2026</footer>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="taskDialog" aria-labelledby="dialogTitle"><form method="dialog" id="taskForm" novalidate><div class="dialog-top"><div><span class="eyebrow">PLAN YOUR NEXT WIN</span><h2 id="dialogTitle">Create a task</h2></div><button type="button" class="close-dialog" id="closeDialog" aria-label="Close">×</button></div><div class="dialog-body"><label for="taskTitle">Task title <span>*</span></label><input id="taskTitle" name="title" maxlength="100" required placeholder="e.g. Finish DBMS assignment" /><label for="taskCourse">Subject / course <span>*</span></label><input id="taskCourse" name="course" maxlength="60" required placeholder="e.g. Database Management" /><div class="form-split"><div><label for="taskDate">Due date <span>*</span></label><input id="taskDate" name="due" type="date" required /></div><div><label for="taskPriority">Priority</label><select id="taskPriority" name="priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></div></div><label for="taskNotes">Notes (optional)</label><textarea id="taskNotes" name="notes" maxlength="300" rows="3" placeholder="Anything you want to remember..."></textarea><p class="form-error" id="formError" role="alert"></p></div><div class="dialog-actions"><button type="button" class="btn btn-secondary" id="cancelDialog">Cancel</button><button type="submit" class="btn btn-primary" id="submitTask">Create task</button></div></form></dialog>
+</body>
+</html>
