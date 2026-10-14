@@ -90,9 +90,9 @@ Manual checks: open the site, add a task, edit it, mark it done, search, filter,
 - Future versions could include calendar sync, reminder notifications, task import and cloud sync.
 
 ## AAT-1 submission
-College evaluation requires this repository and README, true browser output screenshots, and a hard-copy report with code snippets and explanation. Add the real repository URL and screenshot after pushing the files to GitHub. Do not claim cloud sync or AI features that are not implemented.
+College evaluation requires this repository and README, true browser output screenshots, and a hard-copy report with code snippets and explanation. Repository: https://github.com/nityasree-28/studyflow-task-manager . Include a genuine screenshot of this repository in Section 8 of the printed report. Do not claim cloud sync or AI features that are not implemented.
 
 ## Author
-Student: **[Enter your name]**  
-Course / Subject: **[Enter subject]**  
+Student: **Gurram Nitya sree**  
+Course / Subject: **Full stack technologies**  
 Academic Year: **2026-27**
