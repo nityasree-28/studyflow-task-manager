@@ -96,3 +96,34 @@ College evaluation requires this repository and README, true browser output scre
 Student: **Gurram Nitya sree**  
 Course / Subject: **Full stack technologies**  
 Academic Year: **2026-27**
+
+---
+
+## AAT-2 — AI-augmented development: validated JSON backup import
+
+**Student:** Gurram Nitya sree | **USN:** 1NH23CS089 | **Semester/Section:** 7/B  
+**Subject:** Full Stack Technologies | **Assessment:** AAT-2 (10 marks)  
+**GitHub:** https://github.com/nityasree-28/studyflow-task-manager
+
+The AAT-1 version could export tasks as JSON. For AAT-2, ChatGPT assisted with designing and implementing safe **Import a backup** functionality, with validation in `backup.js` and UI logic in `app.js`. This feature is now included in the same repository with the original history preserved.
+
+### How to demonstrate
+1. Open `index.html` in a modern browser.
+2. Select **Export your tasks** to save a JSON file.
+3. Select **Import a backup**, choose that JSON file, and confirm replacing the existing task list.
+4. Verify restored task titles, counts and completion states. Refresh and check persistence on the student's own browser.
+5. Test an invalid JSON file; an impossible calendar date, duplicate task ID, unsupported priority, or oversized backup must be rejected without changing the tasks.
+6. Cancel the confirmation: the previous task list must remain unchanged.
+
+This is a local, browser-only application. **Import replaces the current task list after user confirmation**, so export existing tasks before importing. It does not support login, cloud synchronization or built-in AI inference.
+
+### Tests and evidence
+- `node tests/test_backup.cjs` — 12 backup-validation checks
+- `python tests/test_app.py` — original browser UI regression tests (requires Python Playwright/Chromium)
+- `python tests/test_import_ui.py` — AAT-2 import interaction tests (requires Python Playwright/Chromium)
+- Genuine AAT-2 browser screenshots are in `screenshots/`.
+
+During original automation, browser navigation was restricted, so browser tests used an in-memory localStorage substitute. These checks **do not establish storage persistence after a real browser restart**. Nitya must personally verify browser persistence and document her own analysis/contributions before submitting the report.
+
+### College AAT-2 report
+The hard-copy report follows all 11 required sections: activity title; objective/problem; AI tools; prompts; AI response; student analysis; improvements; final code/screenshots; comparison; limitations; and learning outcomes/conclusion. Submission deadline stated in the college guideline: **20 November 2026**.

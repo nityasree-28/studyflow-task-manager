@@ -92,5 +92,28 @@ function submitTask(e){e.preventDefault();const title=$('taskTitle').value.trim(
 }
 function setView(view){currentView=view;activeFilter=view==='completed'?'completed':view==='upcoming'?'upcoming':'all';const name={dashboard:'Dashboard',all:'All tasks',upcoming:'Upcoming',completed:'Completed'}[view];$('crumbCurrent').textContent=name;$('mainTitle').textContent=view==='dashboard'?'Overview':name;$('taskSectionTitle').textContent=view==='dashboard'?'Your tasks':name;$('filterTabs').hidden=view==='completed'||view==='upcoming';$('mainSubtitle').textContent=view==='completed'?'Celebrate what you have accomplished.':view==='upcoming'?'Stay ahead of your next deadlines.':'Stay organized, stay focused, and make every deadline count.';$('mainTitle').append(makeText('span','wave',' ✦'));$('mainNav').closest('.sidebar').classList.remove('open');render();}
 function exportTasks(){const blob=new Blob([JSON.stringify({app:'StudyFlow',exportedAt:new Date().toISOString(),tasks},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`studyflow-tasks-${nowISO()}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);showToast('Backup downloaded successfully.');}
-function init(){tasks=loadTasks();$('todayDate').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});$('newTaskTop').addEventListener('click',()=>openTaskModal());$('newTaskHero').addEventListener('click',()=>openTaskModal());$('closeDialog').addEventListener('click',()=>$('taskDialog').close());$('cancelDialog').addEventListener('click',()=>$('taskDialog').close());$('taskForm').addEventListener('submit',submitTask);$('searchInput').addEventListener('input',render);$('priorityFilter').addEventListener('change',render);$('filterTabs').addEventListener('click',e=>{const btn=e.target.closest('[data-filter]');if(!btn)return;activeFilter=btn.dataset.filter;render();});$('mainNav').addEventListener('click',e=>{const btn=e.target.closest('[data-view]');if(btn)setView(btn.dataset.view);});$('homeLink').addEventListener('click',e=>{e.preventDefault();setView('dashboard');});$('menuButton').addEventListener('click',()=>$('mainNav').closest('.sidebar').classList.toggle('open'));$('clearCompleted').addEventListener('click',()=>{const count=tasks.filter(t=>t.done).length;if(count&&confirm(`Remove ${count} completed ${count===1?'task':'tasks'}?`)){tasks=tasks.filter(t=>!t.done);saveTasks();render();showToast('Completed tasks cleared.');}});$('exportTasks').addEventListener('click',exportTasks);render();}
+async function importBackupFile(file) {
+  if (!file) return;
+  try {
+    if (file.size > 1024 * 1024) throw new Error('Choose a JSON backup smaller than 1 MB.');
+    const incoming = StudyFlowBackup.validateBackup(await file.text());
+    if (!confirm(`Restore ${incoming.length} tasks from this backup? This will replace the current ${tasks.length} tasks.`)) {
+      showToast('Import cancelled. Your tasks were not changed.');
+      return;
+    }
+    const previous = tasks;
+    tasks = incoming;
+    if (!saveTasks()) { tasks = previous; render(); return; }
+    currentView = 'dashboard'; activeFilter = 'all';
+    $('searchInput').value = ''; $('priorityFilter').value = 'all';
+    setView('dashboard');
+    showToast(`${incoming.length} tasks restored successfully.`);
+  } catch (error) {
+    showToast(error?.message || 'Unable to read the backup file.');
+  }
+}
+function init(){tasks=loadTasks();$('todayDate').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});$('newTaskTop').addEventListener('click',()=>openTaskModal());$('newTaskHero').addEventListener('click',()=>openTaskModal());$('closeDialog').addEventListener('click',()=>$('taskDialog').close());$('cancelDialog').addEventListener('click',()=>$('taskDialog').close());$('taskForm').addEventListener('submit',submitTask);$('searchInput').addEventListener('input',render);$('priorityFilter').addEventListener('change',render);$('filterTabs').addEventListener('click',e=>{const btn=e.target.closest('[data-filter]');if(!btn)return;activeFilter=btn.dataset.filter;render();});$('mainNav').addEventListener('click',e=>{const btn=e.target.closest('[data-view]');if(btn)setView(btn.dataset.view);});$('homeLink').addEventListener('click',e=>{e.preventDefault();setView('dashboard');});$('menuButton').addEventListener('click',()=>$('mainNav').closest('.sidebar').classList.toggle('open'));$('clearCompleted').addEventListener('click',()=>{const count=tasks.filter(t=>t.done).length;if(count&&confirm(`Remove ${count} completed ${count===1?'task':'tasks'}?`)){tasks=tasks.filter(t=>!t.done);saveTasks();render();showToast('Completed tasks cleared.');}});$('exportTasks').addEventListener('click',exportTasks);
+ $('importTasks').addEventListener('click',()=> $('importFile').click());
+ $('importFile').addEventListener('change',event=>{const file=event.target.files?.[0];importBackupFile(file);event.target.value='';});
+ render();}
 document.addEventListener('DOMContentLoaded',init);

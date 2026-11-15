@@ -7,6 +7,7 @@
   <meta name="description" content="StudyFlow - a simple, private student assignment and task manager." />
   <title>StudyFlow | Student Task Manager</title>
   <link rel="stylesheet" href="styles.css" />
+  <script defer src="backup.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -59,6 +60,8 @@
             <section class="progress-panel"><div class="side-panel-head"><h2>Weekly progress</h2><span class="light-icon">↗</span></div><div class="progress-ring" id="progressRing"><div class="ring-core"><strong id="progressPercent">0%</strong><small>completed</small></div></div><p class="progress-message" id="progressMessage">A fresh start! Let's get things done.</p><div class="progress-breakdown"><div><span><i class="dot dot-purple"></i>Completed</span><strong id="miniCompleted">0</strong></div><div><span><i class="dot dot-muted"></i>Remaining</span><strong id="miniPending">0</strong></div></div></section>
             <section class="tip-panel"><div class="tip-icon">✦</div><div><strong>Study tip of the day</strong><p>Break a big task into small steps. Starting is often the hardest part!</p></div></section>
             <button class="export-button" id="exportTasks" type="button"><span>↓</span><span><strong>Export your tasks</strong><small>Download a JSON backup</small></span><span class="export-arrow">↗</span></button>
+            <button class="export-button" id="importTasks" type="button"><span>↑</span><span><strong>Import a backup</strong><small>Restore saved StudyFlow tasks safely</small></span><span class="export-arrow">↗</span></button>
+            <input type="file" id="importFile" accept=".json,application/json" aria-label="Choose StudyFlow backup JSON file" hidden />
           </aside>
         </div>
         <footer class="site-footer">Built with care for better study days. &nbsp;·&nbsp; StudyFlow © 2026</footer>
