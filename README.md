@@ -129,3 +129,12 @@ During original automation, browser navigation was restricted, so browser tests 
 
 ### College AAT-2 report
 The hard-copy report follows all 11 required sections: activity title; objective/problem; AI tools; prompts; AI response; student analysis; improvements; final code/screenshots; comparison; limitations; and learning outcomes/conclusion. Submission deadline stated in the college guideline: **20 November 2026**.
+
+
+## AAT-2 submission details
+- **Student:** Gurram Nitya sree
+- **USN:** 1NH23CS089
+- **Semester / Section:** 7 / B
+- **Course:** Full Stack Technologies (22CSE71)
+- **Report date:** 16/11/2026
+- **College AAT-2 hard-copy deadline:** 20/11/2026
