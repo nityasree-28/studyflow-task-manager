@@ -121,7 +121,9 @@ This is a local, browser-only application. **Import replaces the current task li
 - `node tests/test_backup.cjs` — 12 backup-validation checks
 - `python tests/test_app.py` — original browser UI regression tests (requires Python Playwright/Chromium)
 - `python tests/test_import_ui.py` — AAT-2 import interaction tests (requires Python Playwright/Chromium)
-- Genuine AAT-2 browser screenshots are included in the separately prepared AAT-2 submission ZIP. The repository's `screenshots/` folder currently contains the original AAT-1 screenshots.
+- A cropped genuine AAT-2 browser screenshot demonstrating the new import control is published below; full-resolution AAT-2 screenshots remain in the separate AAT-2 submission ZIP. Original AAT-1 captures are also kept in `screenshots/`.
+
+![AAT-2 import backup button](screenshots/aat2-import-control.webp)
 
 During original automation, browser navigation was restricted, so browser tests used an in-memory localStorage substitute. These checks **do not establish storage persistence after a real browser restart**. Nitya must personally verify browser persistence and document her own analysis/contributions before submitting the report.
 
